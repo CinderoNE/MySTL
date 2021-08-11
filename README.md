@@ -47,4 +47,5 @@
 * `my_unordered_set.h`：包含`unordered_set`和`unordered_multiset`，以`hast_table`作为底层容器，以Key作为`hast_table`存储的元素和用来`hash`的元素。`unordered_set`不允许重复Key，使用`hast_table`的`unique`接口，`unordered_multiset`允许重复Key，使用`hast_table`的`multi`接口
 * `my_unordered_map.h`：包含`unordered_map`和`unordered_multimap`，以`hast_table`作为底层容器，以`std::pair<Key,Value>`作为`hast_table`存储的元素，以Key作为`hash`的元素。`unordered_map`不允许重复Key，使用`hast_table`的`unique`接口，`unordered_multimap`允许重复Key，使用`hast_table`的`multi`接口
 * `my_algorithm.h`：实现少量算法（具体参考代码），包括`hash`函数对象，`heap`堆操作
+* `my_iterator.h`：5类迭代器的定义、迭代器类型的判断，属性的萃取，以及关于迭代器的部分函数和`reverse_iterator`
 
