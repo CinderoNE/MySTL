@@ -19,9 +19,17 @@
 
 ## Build and Test
 
-> `Linux`: ./build.sh
->
-> ./test
+* Linux
+
+  >./build.sh 构建
+  >
+  >./test 执行测试
+
+* Windows
+
+  > 用visual studio2019打开MSVC/MySTL.sln
+  >
+  > F5 执行测试
 
 ## Detail
 
