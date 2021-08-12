@@ -885,7 +885,7 @@ namespace mystl {
 		if (ptr->parent->left == ptr) {
 			ptr->parent->left = child;
 		}
-		else if(ptr->parent->right == ptr){ //一定要判断，排除删除根节点的情况
+		else{
 			ptr->parent->right = child;
 		}
 		if (child != nullptr) {
