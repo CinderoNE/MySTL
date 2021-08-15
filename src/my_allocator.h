@@ -28,6 +28,8 @@ namespace mystl {
 	template<typename T>
 	inline T* allocator<T>::allocate(const size_type count)
 	{
+		if (count == 0)
+			return nullptr;
 		return static_cast<T*>(::operator new(sizeof(T) * count));
 	}
 
