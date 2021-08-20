@@ -337,14 +337,8 @@ namespace mystl {
 	}
 
 	//在范围[first, last) 中构造最大堆。
-	template< typename RandomIt >
-	inline void make_heap(RandomIt first, RandomIt last)
-	{
-		make_heap(first, last, std::less<iter_value_t<RandomIt>>());
-	}
-
 	template< typename RandomIt, typename Compare >
-	inline void make_heap(RandomIt first, RandomIt last,Compare comp)
+	inline void make_heap(RandomIt first, RandomIt last, Compare comp)
 	{
 		using Distance = iter_diff_t<RandomIt>;
 		Distance size = last - first;
@@ -354,32 +348,32 @@ namespace mystl {
 		//非叶子节点的下标
 		Distance non_leaf_index = size / 2 - 1;
 		while (non_leaf_index >= 0) {
-			adjust_down(first, non_leaf_index, size,comp);
+			adjust_down(first, non_leaf_index, size, comp);
 			--non_leaf_index;
 		}
 	}
 
-	//插入位于位置 last-1 的元素到范围 [first, last-1) 所定义的最大堆中
 	template< typename RandomIt >
-	inline void push_heap(RandomIt first, RandomIt last)
+	inline void make_heap(RandomIt first, RandomIt last)
 	{
-		push_heap(first, last, std::less<iter_value_t<RandomIt>>());
+		mystl::make_heap(first, last, std::less<iter_value_t<RandomIt>>());
 	}
 
+	//插入位于位置 last-1 的元素到范围 [first, last-1) 所定义的最大堆中
 	template< typename RandomIt, typename Compare >
-	inline void push_heap(RandomIt first, RandomIt last,Compare comp)
+	inline void push_heap(RandomIt first, RandomIt last, Compare comp)
 	{
 		adjust_up(first, last, comp);
 	}
 
-	//交换在位置 first 的值和在位置 last-1 的值，并令子范围 [first, last-1) 变为堆
-	//这拥有从范围 [first, last) 所定义的堆移除首个元素的效果
 	template< typename RandomIt >
-	inline void pop_heap(RandomIt first, RandomIt last)
+	inline void push_heap(RandomIt first, RandomIt last)
 	{
-		pop_heap(first, last, std::less<iter_value_t<RandomIt>>());
+		mystl::push_heap(first, last, std::less<iter_value_t<RandomIt>>());
 	}
 
+	//交换在位置 first 的值和在位置 last-1 的值，并令子范围 [first, last-1) 变为堆
+	//这拥有从范围 [first, last) 所定义的堆移除首个元素的效果
 	template< typename RandomIt, typename Compare >
 	inline void pop_heap(RandomIt first, RandomIt last, Compare comp)
 	{
@@ -390,21 +384,25 @@ namespace mystl {
 		adjust_down(first, Distance(0), last - first - 1, comp);
 	}
 
-	//转换最大堆 [first, last) 为以升序排序的范围。产生的范围不再拥有堆属性
 	template< typename RandomIt >
-	inline void sort_heap(RandomIt first, RandomIt last)
+	inline void pop_heap(RandomIt first, RandomIt last)
 	{
-		sort_heap(first, last, std::less<iter_value_t<RandomIt>>());
+		mystl::pop_heap(first, last, std::less<iter_value_t<RandomIt>>());
 	}
 
+	//转换最大堆 [first, last) 为以升序排序的范围。产生的范围不再拥有堆属性
 	template< typename RandomIt, typename Compare >
 	inline void sort_heap(RandomIt first, RandomIt last, Compare comp)
 	{
 		while (first != last)
-			pop_heap(first, last--, comp);
+			mystl::pop_heap(first, last--, comp);
 	}
 
-
+	template< typename RandomIt >
+	inline void sort_heap(RandomIt first, RandomIt last)
+	{
+		mystl::sort_heap(first, last, std::less<iter_value_t<RandomIt>>());
+	}
 
 	
 }//end of namespace mystl
