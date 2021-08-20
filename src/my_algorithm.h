@@ -295,7 +295,7 @@ namespace mystl {
 	template<typename RandomIt, typename Compare,typename Distance>
 	void adjust_down(RandomIt first,Distance parent_index, Distance size, Compare comp) {
 		using T = iter_value_t<RandomIt>;
-		T tmp = *(first + parent_index); //暂存需要下沉的值
+		T tmp = std::move(*(first + parent_index)); //暂存需要下沉的值
 
 		Distance child_index = 2 * parent_index + 1;
 		
@@ -308,11 +308,11 @@ namespace mystl {
 			if (!comp(tmp,*(first + child_index)))
 				break;
 
-			*(first + parent_index) = *(first + child_index);
+			*(first + parent_index) = std::move(*(first + child_index));
 			parent_index = child_index;
 			child_index = 2 * parent_index + 1;
 		}
-		*(first + parent_index) = tmp;
+		*(first + parent_index) = std::move(tmp);
 	}
 
 	//上浮操作
@@ -325,15 +325,15 @@ namespace mystl {
 		Distance child_index = (last - first) - 1;
 		Distance parent_index = (child_index - 1) / 2;
 
-		T tmp = *(first + child_index);//暂存需要上浮的值
+		T tmp = std::move(*(first + child_index));//暂存需要上浮的值
 
 		//没有到达顶端，且需要上浮的值的权值“大于”父节点的权值
 		while (child_index > 0 && comp(*(first + parent_index), tmp)) {
-			*(first + child_index) = *(first + parent_index);
+			*(first + child_index) = std::move(*(first + parent_index));
 			child_index = parent_index;
 			parent_index = (child_index - 1) / 2;
 		}
-		*(first + child_index) = tmp;
+		*(first + child_index) = std::move(tmp);
 	}
 
 	//在范围[first, last) 中构造最大堆。
