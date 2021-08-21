@@ -45,6 +45,12 @@ namespace mystl {
 	template<typename T>
 	struct is_trivially_move_assignable : bool_constant<is_trivially_move_assignable_v<T>> {};
 
+	//是否是不重要的析构函数
+	template<typename T>
+	constexpr bool is_trivially_destructible_v = std::is_trivially_destructible<T>::value;
+
+	template<typename T>
+	struct is_trivially_destructible : bool_constant<is_trivially_destructible_v<T>> {};
 
 	//根据类型T判断是否是pair
 	template<typename T>
