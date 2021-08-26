@@ -1366,12 +1366,12 @@ namespace mystl {
 		while (curr != nullptr) {
 			const key_type& curr_key = node_key(curr);
 			if (!key_comp_(curr_key,key)) {
-				//当前key的权值小于等于curr_key
+				//curr_key的权值不小于key
 				ret = curr;       //记录当前节点
 				curr = curr->left;
 			}
 			else {
-				//当前key >= curr_key,继续向右找第一个大于它的节点
+				//curr_key的权值小于key，继续向右找第一个不小于key的节点
 				curr = curr->right;
 			}
 		}
