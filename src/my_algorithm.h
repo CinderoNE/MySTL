@@ -267,7 +267,7 @@ namespace mystl {
 	//short, unsigned short, int, unsigned int, long, unsigned long, long long, unsigned long long
 	//枚举类型
 	template<typename T>
-	struct hash<T,std::void_t<std::is_integral<T>,std::is_enum<T>,std::is_pointer<T>>>
+	struct hash<T,std::void_t<std::is_integral<T>,std::is_enum<T>>>
 	{
 		unsigned operator()(T value) const {
 			return static_cast<unsigned>(value);
@@ -279,9 +279,7 @@ namespace mystl {
 	struct hash<T*>
 	{
 		unsigned operator()(T* ptr) const {
-			unsigned ret = 0;
-			memmove(&ret, ptr, sizeof(unsigned));
-			return ret;
+			return reinterpret_cast<unsigned>(ptr);
 		}
 	};
 
